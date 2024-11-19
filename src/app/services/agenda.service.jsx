@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const WORKS_API_URL = 'http://localhost:9000/Work';
+const WORKS_API_URL = 'http://ec2-18-218-203-108.us-east-2.compute.amazonaws.com:9000/Work';
 const TEACHERS_API_URL = 'http://ec2-18-218-203-108.us-east-2.compute.amazonaws.com:9000/api/teachers';
 
 
@@ -38,22 +38,7 @@ export const getUpdatedWorksByTeacher = async (teacherId) => {
         throw error;
     }
 };
-export const downloadReportExcel = async (teacherId) => {
-    if (!teacherId) {
-        console.error('El ID del profesor no está definido');
-        throw new Error('El ID del profesor es requerido');
-    }
-    try {
-        const response = await axios.get(`${WORKS_API_URL}/updated-by-teacher/report/excel`, {
-            params: { teacherId },
-            responseType: 'blob' // Importante para manejar el archivo binario
-        });
-        return response.data; // Esto devuelve el archivo Excel como un blob
-    } catch (error) {
-        console.error('Error descargando el reporte en Excel:', error);
-        throw error;
-    }
-};
+
 
 
 export const getTeacherInfo = async (id) => {
